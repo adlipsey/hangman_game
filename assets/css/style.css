@@ -1,0 +1,23 @@
+#board {
+	border: 2px solid black;
+	padding: 10px;
+}
+
+#usedLetters {
+	border: 2px solid red;
+	padding: 10px;
+}
+
+.scoreBoard {
+	background-color: gray;
+	border: 2px solid blue;
+}
+
+h3 {
+	color: green;
+}
+
+p {
+	background-color: white;
+	color: red;
+}
