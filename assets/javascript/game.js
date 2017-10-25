@@ -9,53 +9,60 @@ var hangman = {
 
 
 	pickWord : function() {
+		//Create random value corresponding to indices of wordBank array
 		var index = Math.floor( Math.random() * wordBank.length);
+		//Split word at random index into correctWord array
 		correctWord = wordBank[index].split("");
 	},
 
 	drawBoard : function() {
+		//Display current number of wins
 		document.getElementById("wins").innerHTML = hangman.gamesWon;
+		//Display current number of guesses
 		document.getElementById("guesses").innerHTML = hangman.guessesLeft;
+		//Iterates through correctWord creating a copy in displayWord
 		for(var i = 0; i < correctWord.length; i++) {
+			//Spaces in multi-word strings are preserved
 			if (correctWord[i] === " ") {
 				displayWord[i] = " ";
 			}
+			//All other characters are hidden with _
 			else {
 				displayWord[i] = "_";
 			}
 		}
-		
+		//Displays the "hidden" displayWord array as string 
 		document.getElementById("board").innerHTML = displayWord.join("");
 	},
 
+//Commented out attempt to separate userInput from playGame so that EventListener can be removed at end of game
 	/*userInput : function(guess) {
-			if(correctWord.includes(guess)) {
-				for(var i = 0; i < correctWord.length; i++){
-					if(guess.key === correctWord[i]) {
-					 	displayWord[i] = guess; 
-					}
+		if(correctWord.includes(guess)) {
+			for(var i = 0; i < correctWord.length; i++){
+				if(guess.key === correctWord[i]) {
+					 displayWord[i] = guess; 
 				}
 			}
-			else if (wrongLetters.includes(guess)) {
-			}
-			else {
-				wrongLetters.push(guess);
-				document.getElementById("usedLetters").innerHTML = wrongLetters;
-				hangman.guessesLeft --;
-				document.getElementById("guesses").innerHTML = hangman.guessesLeft;
-			}
+		}
+		else if (wrongLetters.includes(guess)) {
+		}
+		else {
+			wrongLetters.push(guess);
+			document.getElementById("usedLetters").innerHTML = wrongLetters;
+			hangman.guessesLeft --;
+			document.getElementById("guesses").innerHTML = hangman.guessesLeft;
+		}
 			
-			document.getElementById("board").innerHTML = displayWord.join("");
+		document.getElementById("board").innerHTML = displayWord.join("");
 				
-			if(correctWord.join("") == displayWord.join("")) {
-				hangman.youWon();
-				return;	
-			}
-			if(hangman.guessesLeft === 0) {
-				hangman.youLost();
-				return;
-			}
-
+		if(correctWord.join("") == displayWord.join("")) {
+			hangman.youWon();
+			return;	
+		}
+		if(hangman.guessesLeft === 0) {
+			hangman.youLost();
+			return;
+		}
 	},
 
 	playGame : function() {
@@ -104,7 +111,7 @@ var hangman = {
 	} ,
 
 	youLost : function() {
-		document.getElementById("game-over").innerHTML = "Sorry, you ran out of guesses! Try a different word."
+		document.getElementById("game-over").innerHTML = "Sorry, you ran out of guesses!"
 			hangman.newGame();
 		
 	},
