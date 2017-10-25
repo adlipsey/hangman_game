@@ -1,6 +1,6 @@
 var wordBank = ["lager", "stout", "pilsner", "pale ale", "porter", "weizen", "bock", "lambic", "schwarzbier", "saison", "dubbel", "tripel", "kolsch", "doppelbock"];
 var	correctWord = [];
-var	boardDisplay = [];
+var	displayWord = [];
 var	wrongLetters = [];
 
 var hangman = {
@@ -9,49 +9,35 @@ var hangman = {
 
 
 	pickWord : function() {
-		var index = Math.floor( Math.random() * (wordBank.length - 1));
-		var word = wordBank[index];
-		correctWord = word.split("");
+		var index = Math.floor( Math.random() * wordBank.length);
+		correctWord = wordBank[index].split("");
 	},
 
 	drawBoard : function() {
-		var display = [];
+		document.getElementById("wins").innerHTML = hangman.gamesWon;
 		document.getElementById("guesses").innerHTML = hangman.guessesLeft;
 		for(var i = 0; i < correctWord.length; i++) {
 			if (correctWord[i] === " ") {
-				display[i] = " ";
-				document.getElementById("board").innerHTML += (display[i] + " ");
+				displayWord[i] = " ";
 			}
 			else {
-				display[i] = "_";
-				document.getElementById("board").innerHTML += (display[i] + " ");
+				displayWord[i] = "_";
 			}
 		}
 		
-		return display;
-	},
-
-	isLetter : function (arr, letter) {
-		if(arr.indexOf(letter) === -1) {
-			return false;
-		}
-		else {
-			return true;
-		}
+		document.getElementById("board").innerHTML = displayWord.join("");
 	},
 
 	playGame : function() {
 		document.addEventListener('keydown', function(guess) {
-			if(hangman.isLetter(correctWord, guess.key)) {
-				document.getElementById("board").innerHTML = "";
+			if(correctWord.includes(guess.key)) {
 				for(var i = 0; i < correctWord.length; i++){
 					if(guess.key === correctWord[i]) {
-					 	boardDisplay[i] = guess.key ; 
+					 	displayWord[i] = guess.key; 
 					}
-					document.getElementById("board").innerHTML += (boardDisplay[i] + " ");
 				}
 			}
-			else if (hangman.isLetter(wrongLetters, guess.key)) {
+			else if (wrongLetters.includes(guess.key)) {
 			}
 			else {
 				wrongLetters.push(guess.key);
@@ -60,6 +46,7 @@ var hangman = {
 				hangman.guessesLeft --;
 				document.getElementById("guesses").innerHTML = hangman.guessesLeft;
 			}
+			document.getElementById("board").innerHTML = displayWord.join("");
 		})
 	},
 
@@ -70,5 +57,5 @@ var hangman = {
 
 hangman.pickWord();
 console.log(correctWord);
-boardDisplay = hangman.drawBoard();
+hangman.drawBoard();
 hangman.playGame();
