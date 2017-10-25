@@ -71,7 +71,9 @@ var hangman = {
 
 
 	playGame : function() {
+		//Initiates Listener for user kepresses
 		document.addEventListener('keyup', function userInput(guess) {
+			//If key press is in correctWord, finds all occurences and reveals them in displayWord
 			if(correctWord.includes(guess.key)) {
 				for(var i = 0; i < correctWord.length; i++){
 					if(guess.key === correctWord[i]) {
@@ -79,30 +81,36 @@ var hangman = {
 					}
 				}
 			}
+			//If not in correctWord but is in wrongLetters, nothing happens
 			else if (wrongLetters.includes(guess.key)) {
 			}
+			//If not in correct word or wrongLetters, added to wrongLetters, guessesLeft decremented by 1
 			else {
 				wrongLetters.push(guess.key);
 				document.getElementById("usedLetters").innerHTML = wrongLetters;
 				hangman.guessesLeft --;
 				document.getElementById("guesses").innerHTML = hangman.guessesLeft;
 			}
-			
+			//Updates displayWord on screen
 			document.getElementById("board").innerHTML = displayWord.join("");
-				
+
+			//Checks for win condition
 			if(correctWord.join("") == displayWord.join("")) {
 				hangman.youWon();
-				return;	
+				document.removeEventListener('keyup', userInput);
 			}
+			//Checks for lose condition
 			if(hangman.guessesLeft === 0) {
 				hangman.youLost();
-				return;
+				document.removeEventListener('keyup', userInput);
 			}
+		
 		})
 			
 	},
 
 	youWon : function() {
+		console.log("I'm running");
 		document.getElementById("game-over").innerHTML = "Congratulations! You won!"
 		hangman.gamesWon ++;
 		document.getElementById("wins").innerHTML = hangman.gamesWon;
