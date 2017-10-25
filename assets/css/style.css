@@ -9,6 +9,11 @@
 	padding: 10px;
 }
 
+#game-over {
+	border: 2px dotted purple;
+	padding: 10px;
+}
+
 .scoreBoard {
 	background-color: gray;
 	border: 2px solid blue;

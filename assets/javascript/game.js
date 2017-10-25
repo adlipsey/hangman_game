@@ -28,8 +28,9 @@ var hangman = {
 		document.getElementById("board").innerHTML = displayWord.join("");
 	},
 
+
 	playGame : function() {
-		document.addEventListener('keydown', function(guess) {
+		document.addEventListener('keyup', function userInput(guess) {
 			if(correctWord.includes(guess.key)) {
 				for(var i = 0; i < correctWord.length; i++){
 					if(guess.key === correctWord[i]) {
@@ -41,21 +42,56 @@ var hangman = {
 			}
 			else {
 				wrongLetters.push(guess.key);
-				console.log(wrongLetters);
 				document.getElementById("usedLetters").innerHTML = wrongLetters;
 				hangman.guessesLeft --;
 				document.getElementById("guesses").innerHTML = hangman.guessesLeft;
 			}
+			
 			document.getElementById("board").innerHTML = displayWord.join("");
+				
+			if(correctWord.join("") == displayWord.join("")) {
+				hangman.youWon();
+				return;	
+			}
+			if(hangman.guessesLeft === 0) {
+				hangman.youLost();
+				return;
+			}
 		})
+			
 	},
 
-	//add check for win condition
+	youWon : function() {
+		document.getElementById("game-over").innerHTML = "Congratulations! You won!"
+		hangman.gamesWon ++;
+		document.getElementById("wins").innerHTML = hangman.gamesWon;
+			hangman.newGame();
+		
+	} ,
 
-	//add check for lose condition 
+	youLost : function() {
+		document.getElementById("game-over").innerHTML = "Sorry, you ran out of guesses! Try a different word."
+			hangman.newGame();
+		
+	},
+
+	reset : function() {
+		console.log("I am being run");
+		//document.removeEventListener('keyup', userInput());
+		wrongLetters = [];
+		document.getElementById("usedLetters").innerHTML = "";
+		document.getElementById("guesses").innerHTML = "";
+		hangman.guessesLeft = 10;
+		displayWord = [];
+		document.getElementById("board").innerHTML = "";
+	},
+
+	newGame : function() {
+		hangman.reset();
+		hangman.pickWord();
+		hangman.drawBoard();
+		hangman.playGame();
+	},
 }
 
-hangman.pickWord();
-console.log(correctWord);
-hangman.drawBoard();
-hangman.playGame();
+hangman.newGame();
