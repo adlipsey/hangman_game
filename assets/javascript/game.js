@@ -28,6 +28,40 @@ var hangman = {
 		document.getElementById("board").innerHTML = displayWord.join("");
 	},
 
+	/*userInput : function(guess) {
+			if(correctWord.includes(guess)) {
+				for(var i = 0; i < correctWord.length; i++){
+					if(guess.key === correctWord[i]) {
+					 	displayWord[i] = guess; 
+					}
+				}
+			}
+			else if (wrongLetters.includes(guess)) {
+			}
+			else {
+				wrongLetters.push(guess);
+				document.getElementById("usedLetters").innerHTML = wrongLetters;
+				hangman.guessesLeft --;
+				document.getElementById("guesses").innerHTML = hangman.guessesLeft;
+			}
+			
+			document.getElementById("board").innerHTML = displayWord.join("");
+				
+			if(correctWord.join("") == displayWord.join("")) {
+				hangman.youWon();
+				return;	
+			}
+			if(hangman.guessesLeft === 0) {
+				hangman.youLost();
+				return;
+			}
+
+	},
+
+	playGame : function() {
+		document.addEventListener('keyup', hangman.userInput(guess.key));
+	},*/
+
 
 	playGame : function() {
 		document.addEventListener('keyup', function userInput(guess) {
@@ -76,8 +110,7 @@ var hangman = {
 	},
 
 	reset : function() {
-		console.log("I am being run");
-		//document.removeEventListener('keyup', userInput());
+		//document.removeEventListener('keyup', hangman.userInput());
 		wrongLetters = [];
 		document.getElementById("usedLetters").innerHTML = "";
 		document.getElementById("guesses").innerHTML = "";
