@@ -70,8 +70,8 @@ var hangman = {
 			}
 			//Checks for lose condition
 			if(hangman.guessesLeft === 0) {
-				hangman.youLost();
 				document.removeEventListener('keyup', userInput);
+				hangman.youLost();
 			}
 		
 		})
@@ -80,21 +80,28 @@ var hangman = {
 
 	youWon : function() {
 		document.getElementById("game-over").className = "fade-out";
-		document.getElementById("game-over").innerHTML = "Congratulations! You won!";
+		document.getElementById("game-over").innerHTML = "Congratulations! You won! Press Enter key to play again.";
 		hangman.gamesWon ++;
 		document.getElementById("wins").innerHTML = hangman.gamesWon;
-		
+		document.addEventListener('keyup', function again(yes) {
+			if(yes.keyCode == 13){
+			document.removeEventListener('keyup', again);
 			hangman.newGame();
+			};
+		})
 	
 	} ,
 
 	youLost : function() {
 		document.getElementById("game-over").className = "fade-out";
-		document.getElementById("game-over").innerHTML = "Sorry, you ran out of guesses!";
-
+		document.getElementById("game-over").innerHTML = "Sorry, you ran out of guesses! Press Enter key to play again.";
+		document.getElementById("board").innerHTML = correctWord.join("");
+		document.addEventListener('keyup', function again(yes) {
+			if(yes.keyCode == 13){
+			document.removeEventListener('keyup', again);
 			hangman.newGame();
-
-		
+			};
+		})
 	},
 
 	reset : function() {
