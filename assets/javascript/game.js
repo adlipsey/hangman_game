@@ -1,4 +1,4 @@
-var wordBank = ["lager", "stout", "pilsner", "pale ale", "porter", "weizen", "bock", "lambic", "schwarzbier", "saison", "dubbel", "tripel", "kolsch", "doppelbock"];
+var wordBank = ["lager", "chardonnay", "stout", "riesling", "pilsner", "merlot", "pale ale", "pinot noir", "porter", "white zin", "weizen", "sauvignon blanc", "bock", "pinot grigio", "lambic", "margarita", "schwarzbier", "manhattan", "saison", "daiquiri", "dubbel", "mojito", "tripel", "martini", "kolsch", "bloody mary", "doppelbock", "cosmopolitan"];
 var	correctWord = [];
 var	displayWord = [];
 var	wrongLetters = [];
