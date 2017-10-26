@@ -94,17 +94,8 @@ p {
 	font-size: 2em;
 	visibility: show;
 	opacity: 0;
-	transition: opacity 4s linear;
+	transition: opacity 5s linear;
 
 }
 
-.pic-fade-out {
-	opacity: 0;
-	transition: opacity 4s linear;
-}
-
-.fade-in {
-	opacity: 1;
-	transition: opacity 4s linear;
-}
 
