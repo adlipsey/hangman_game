@@ -83,14 +83,17 @@ var hangman = {
 		document.getElementById("game-over").innerHTML = "Congratulations! You won!";
 		hangman.gamesWon ++;
 		document.getElementById("wins").innerHTML = hangman.gamesWon;
-			hangman.newGame();
 		
+			hangman.newGame();
+	
 	} ,
 
 	youLost : function() {
 		document.getElementById("game-over").className = "fade-out";
 		document.getElementById("game-over").innerHTML = "Sorry, you ran out of guesses!";
+
 			hangman.newGame();
+
 		
 	},
 
