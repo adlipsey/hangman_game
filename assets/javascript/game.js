@@ -35,40 +35,6 @@ var hangman = {
 		document.getElementById("board").innerHTML = displayWord.join("");
 	},
 
-//Commented out attempt to separate userInput from playGame so that EventListener can be removed at end of game
-	/*userInput : function(guess) {
-		if(correctWord.includes(guess)) {
-			for(var i = 0; i < correctWord.length; i++){
-				if(guess.key === correctWord[i]) {
-					 displayWord[i] = guess; 
-				}
-			}
-		}
-		else if (wrongLetters.includes(guess)) {
-		}
-		else {
-			wrongLetters.push(guess);
-			document.getElementById("usedLetters").innerHTML = wrongLetters;
-			hangman.guessesLeft --;
-			document.getElementById("guesses").innerHTML = hangman.guessesLeft;
-		}
-			
-		document.getElementById("board").innerHTML = displayWord.join("");
-				
-		if(correctWord.join("") == displayWord.join("")) {
-			hangman.youWon();
-			return;	
-		}
-		if(hangman.guessesLeft === 0) {
-			hangman.youLost();
-			return;
-		}
-	},
-
-	playGame : function() {
-		document.addEventListener('keyup', hangman.userInput(guess.key));
-	},*/
-
 
 	playGame : function() {
 		//Initiates Listener for user kepresses
@@ -90,9 +56,12 @@ var hangman = {
 				document.getElementById("usedLetters").innerHTML = wrongLetters;
 				hangman.guessesLeft --;
 				document.getElementById("guesses").innerHTML = hangman.guessesLeft;
+				document.getElementById ("hangmanPic").src = "./assets/images/bev_nap"+hangman.guessesLeft+".png";
 			}
 			//Updates displayWord on screen
 			document.getElementById("board").innerHTML = displayWord.join("");
+			//Resets win/lose screen for later
+			document.getElementById("game-over").className = "hidden";
 
 			//Checks for win condition
 			if(correctWord.join("") == displayWord.join("")) {
@@ -110,8 +79,8 @@ var hangman = {
 	},
 
 	youWon : function() {
-		console.log("I'm running");
-		document.getElementById("game-over").innerHTML = "Congratulations! You won!"
+		document.getElementById("game-over").className = "fade-out";
+		document.getElementById("game-over").innerHTML = "Congratulations! You won!";
 		hangman.gamesWon ++;
 		document.getElementById("wins").innerHTML = hangman.gamesWon;
 			hangman.newGame();
@@ -119,7 +88,8 @@ var hangman = {
 	} ,
 
 	youLost : function() {
-		document.getElementById("game-over").innerHTML = "Sorry, you ran out of guesses!"
+		document.getElementById("game-over").className = "fade-out";
+		document.getElementById("game-over").innerHTML = "Sorry, you ran out of guesses!";
 			hangman.newGame();
 		
 	},
@@ -132,6 +102,8 @@ var hangman = {
 		hangman.guessesLeft = 10;
 		displayWord = [];
 		document.getElementById("board").innerHTML = "";
+		document.getElementById("hangmanPic").src = "./assets/images/bev_nap10.png";
+
 	},
 
 	newGame : function() {

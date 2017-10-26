@@ -1,28 +1,103 @@
+body {
+	background: url(../images/bar_bg.jpg) no-repeat fixed center;
+}
+
+h1 {
+	font-family: 'Patrick Hand SC', serif;
+	font-size: 4em;
+	color:blue;
+}
+
+h3 {
+	font-family: 'Patrick Hand SC', serif;
+	color: black;
+}
+
+p {
+	text-align: center;
+	color: black;
+}
+
 #board {
-	border: 2px solid black;
+	background-color: rgba(180,180,180, 0.6);
+	color: blue;
+	font-family: 'Permanent Marker', cursive;
+	font-size: 2em;
+	border-bottom: 2px solid black;
 	padding: 10px;
+	text-align: center;
 	letter-spacing: 1em;
+
+}
+
+#hangmanPic {
+	display: block;
+	margin: auto;
+	width: 125%;
+	height: 125%;
 }
 
 #usedLetters {
-	border: 2px solid red;
+	background-color: rgba(100,100,100, 0.6);
+	font-family: 'Patrick Hand SC', serif;
+	font-size: 2em;
+	letter-spacing: 0.5em;
+	color: red;
+	border-top: 2px solid black;
 	padding: 10px;
+}
+
+#wins {
+	font-family: 'Permanent Marker', cursive;
+	font-size: 1.5em;
+	color: blue;
+}
+
+#guesses {
+	font-family: 'Permanent Marker', cursive;
+	font-size: 1.5em;
+	color: blue;
 }
 
 #game-over {
 	padding: 1em;
 }
 
+.jumbotron {
+	background-color: rgba(120,120,120, 0.6);
+	margin-top: 1em;
+	padding: 1em;
+}
+
 .scoreBoard {
-	background-color: gray;
-	border: 2px solid blue;
+	margin-top: 1em;
+	background-color: rgba(145,115,94,0.6);
+	padding: 10px;
+	border: 4px solid black;
 }
 
-h3 {
-	color: green;
+.hidden {
+	visibility: hidden;
+	opacity: 1;
 }
 
-p {
-	background-color: white;
+.fade-out {
+	font-family: 'Patrick Hand SC', serif;
 	color: red;
+	font-size: 2em;
+	visibility: show;
+	opacity: 0;
+	transition: opacity 4s linear;
+
 }
+
+.pic-fade-out {
+	opacity: 0;
+	transition: opacity 4s linear;
+}
+
+.fade-in {
+	opacity: 1;
+	transition: opacity 4s linear;
+}
+
