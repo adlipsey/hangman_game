@@ -73,45 +73,61 @@ var hangman = {
 				document.removeEventListener('keyup', userInput);
 				hangman.youLost();
 			}
-		
 		})
-			
 	},
 
 	youWon : function() {
+		//Changes game-over message class to trigger transition animation
 		document.getElementById("game-over").className = "fade-out";
+		//Displays win message to game-over ID
 		document.getElementById("game-over").innerHTML = "Congratulations! You won! Press Enter key to play again.";
+		//Increments # of games won
 		hangman.gamesWon ++;
+		//Displays current number of games won to document
 		document.getElementById("wins").innerHTML = hangman.gamesWon;
+		//Adds event listener for Enter key
 		document.addEventListener('keyup', function again(yes) {
 			if(yes.keyCode == 13){
-			document.removeEventListener('keyup', again);
-			hangman.newGame();
+				//Removes listener after it served its purpose
+				document.removeEventListener('keyup', again);
+				//Triggers a new game
+				hangman.newGame();
 			};
 		})
-	
 	} ,
 
 	youLost : function() {
+		//Changes game-over message class to trigger transition animation
 		document.getElementById("game-over").className = "fade-out";
+		//Displays lose message to game-over ID
 		document.getElementById("game-over").innerHTML = "Sorry, you ran out of guesses! Press Enter key to play again.";
+		//Displays correctWord to document in place of unfinished displayWord
 		document.getElementById("board").innerHTML = correctWord.join("");
+		//Adds event listener for Enter key
 		document.addEventListener('keyup', function again(yes) {
 			if(yes.keyCode == 13){
-			document.removeEventListener('keyup', again);
-			hangman.newGame();
+				//Removes listener after it served its purpose
+				document.removeEventListener('keyup', again);
+				//Triggers a new game
+				hangman.newGame();
 			};
 		})
 	},
 
 	reset : function() {
-		//document.removeEventListener('keyup', hangman.userInput());
+		//Clears wrongLetters array
 		wrongLetters = [];
+		//Clears usedLetters HTML div
 		document.getElementById("usedLetters").innerHTML = "";
+		//Clears guesses HTML div
 		document.getElementById("guesses").innerHTML = "";
+		//Resets guessesLeft to 10
 		hangman.guessesLeft = 10;
+		//Clears displayWord array
 		displayWord = [];
+		//Clears board HTML div
 		document.getElementById("board").innerHTML = "";
+		//Resets hangmanPic to 10
 		document.getElementById("hangmanPic").src = "./assets/images/bev_nap10.png";
 
 	},
